@@ -1,4 +1,8 @@
 # Unic P1+ Firmware tool
+
+Short writeup of my experiences with the Unic P1+'s firmware.
+(Unfortuntaly I broke the device, please read carefully if you want to try this on your own. Also if you have any Idea how to fix a botched nand, please get in touch) 
+
 Okay, the story is simple, there is this cute, tiny Wifi projector, the Unic P1+. It *could* have been such a great device...
 
 Unfortunately streaming via Wifi is fairly laggy and the promised support for directly streaming Video from and Android device (via otg) doesn't work. This would be a killer feature, since that should have delivered higher frame-rates as well as extended battery-life (at least on the projector side).
@@ -51,7 +55,7 @@ I obtained a Firmware update for it (I won't share it here, I don't want to get 
 I ran binwalk on the firmware update and I found it contains basically an header + an ext2 rootfs, bingo!
 
 
-#### default root password
+##### default root password
 Poking around the rootfs and locating `/ect/shadow` reveals: `root:$1$EIYYGRBK$inOu3EFhrsNF0FzaGDozn.:14610:0:99999:7:::`, which decodes to "am2016".
 
 Once extracted, the rootfs could easily be mounted and inspected and modified. But whenever I treid to change it and copied it back into the update-package, it wouldn't install.
@@ -99,6 +103,6 @@ What's very interesting is:
 
 ## Big Issue:
 - Well yes, the code, I apologize, I haven't properly coded C for a long time :/
-- But also !!DON'T MAKE THE ROOTFS LARGER!!, there is no check in the firmware and I got to confident and broke my projector ://
+- But also !!DON'T MAKE THE ROOTFS LARGER!!, there is no check in the firmware and I got too confident and broke my projector ://
   -> If anyone has an Idea how to fix this, please get in touch!
 
